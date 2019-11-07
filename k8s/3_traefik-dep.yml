@@ -51,7 +51,10 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: traefik
   name: helloworld
+  labels:
+    app: helloworld
 spec:
   selector:
     matchLabels:
@@ -64,7 +67,3 @@ spec:
       containers:
       - name: helloworld
         image: hello-world:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
