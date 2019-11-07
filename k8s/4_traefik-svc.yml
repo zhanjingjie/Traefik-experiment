@@ -1,0 +1,35 @@
+# Connects Traefik with cloud provider's load balancer.
+# All external traffic comes through here.
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-ingress-controller
+  namespace: default
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 35.227.166.131
+  selector:
+    app: traefik
+  ports:
+  - name: https
+    port: 443
+    targetPort: 443
+  - name: http
+    port: 80
+    targetPort: 80
+---
+# Exposes Traefik dashboard inside the cluster.
+# External access is provided by IngressRoute.
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-dashboard
+  namespace: traefik
+spec:
+  type: ClusterIP
+  selector:
+    app: traefik
+  ports:
+  - name: dashboard
+    port: 8080
+    targetPort: 8080
