@@ -22,6 +22,10 @@ spec:
       containers:
       - name: traefik
         image: traefik:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - name: http
           containerPort: 80
@@ -42,4 +46,25 @@ spec:
         - --log.level=INFO
         - --global.sendanonymoususage=false
         - --global.checknewversion=false
-          
+---
+# A hello world Deployment.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld
+spec:
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: hello-world:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

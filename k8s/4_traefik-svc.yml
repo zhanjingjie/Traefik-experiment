@@ -33,3 +33,19 @@ spec:
   - name: dashboard
     port: 8080
     targetPort: 8080
+---
+# Exposes Traefik Hello World inside the cluster.
+# External access is provided by IngressRoute.
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-helloworld
+  namespace: traefik
+spec:
+  type: ClusterIP
+  selector:
+    app: traefik
+  ports:
+  - name: web
+    port: 80
+    targetPort: 80
