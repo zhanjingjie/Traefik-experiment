@@ -63,7 +63,9 @@ spec:
     metadata:
       labels:
         app: helloworld
+      annotations:
+        linkerd.io/inject: enabled
     spec:
       containers:
       - name: helloworld
-        image: hello-world:latest
+        image: jjzhan/helloworld:v1
