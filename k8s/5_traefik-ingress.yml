@@ -6,9 +6,9 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`carpenoctem.me`) && PathPrefix(`/admin`)
+  - match: PathPrefix(`/admin`)
     kind: Rule
     priority: 1
     services:
     - name: traefik-admin
-      port: 8080
+      port: 80

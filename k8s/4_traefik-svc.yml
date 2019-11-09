@@ -9,7 +9,7 @@ spec:
   ports:
     - name: web
       port: 80
-      targetPort: 80
+      targetPort: 8000
   selector:
     app: traefik
 ---
@@ -19,9 +19,9 @@ metadata:
   name: traefik-admin
 spec:
   type: ClusterIP
-  ports:
-    - name: admin
-      port: 8080
-      targetPort: 8080
   selector:
     app: traefik
+  ports:
+  - name: admin
+    port: 80
+    targetPort: 8080

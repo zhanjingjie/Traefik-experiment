@@ -21,18 +21,17 @@ spec:
         - name: traefik
           image: traefik:latest
           args:
-            - --api
+            - --api.insecure=true
             - --api.dashboard=true
-            - --accesslog
-            - --entrypoints.web.Address=:80
-            - --entrypoints.web.forwardedheaders.insecure=true
+            - --ping=true
+            - --entrypoints.web.Address=:8000
+            - --entrypoints.admin.Address=:8080
             - --providers.kubernetescrd
-            - --accesslog=true
             - --log=true
           ports:
             - name: web
-              containerPort: 80
-              hostPort: 80
+              containerPort: 8000
+              protocol: TCP
             - name: admin
               containerPort: 8080
-              hostPort: 8080
+              protocol: TCP
